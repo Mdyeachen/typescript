@@ -1,4 +1,5 @@
-const menu = [
+"use strict";
+var menu = [
     { name: "Margherita", price: 10 },
     { name: "Pepperoni", price: 12 },
     { name: "BBQ Chicken", price: 14 },
@@ -8,43 +9,39 @@ const menu = [
     { name: "Buffalo Chicken", price: 14 },
     { name: "Four Cheese", price: 13 },
     { name: "Mushroom & Truffle", price: 16 },
-    
 ];
-
-let cashInRegister = 100;
-let orderId = 0;
-const orderQueue = [];
-
+var cashInRegister = 100;
+var orderId = 1;
+var orderQueue = [];
 // add pizza function
-const addPizza = (pizzaObject) => {
+var addPizza = function (pizzaObject) {
     menu.push(pizzaObject);
-}
-
+};
 // order place function
-const placeOrder = (pizzaName) => {
-    const findPizza = menu.find(pizzaObject => pizzaObject.name === pizzaName);
-    if(findPizza) 
-        cashInRegister += findPizza.price;
-        const newOrder = { id : orderId++, pizza : findPizza.name, status : "ordered"}
-        orderQueue.push(newOrder)
-
-        return newOrder
-}
-
-
+var placeOrder = function (pizzaName) {
+    var findPizza = menu.find(function (pizzaObject) { return pizzaObject.name === pizzaName; });
+    if (!findPizza) {
+        console.error("".concat(findPizza, " is not exit in the menu"));
+        return;
+    }
+    cashInRegister += findPizza.price;
+    var newOrder = { id: orderId++, pizza: findPizza.name, status: "ordered" };
+    orderQueue.push(newOrder);
+    return newOrder;
+};
 // order complete function
-const completeOrder = (orderid) => {
-    const findOrder = orderQueue.find(order => order.id === orderid);
-    if(findOrder)
+var completeOrder = function (orderid) {
+    var findOrder = orderQueue.find(function (order) { return order.id === orderid; });
+    if (findOrder)
         findOrder.status = "Completed";
-
     return findOrder;
-}
-
+};
 addPizza({ name: "Pesto Chicken", price: 12 });
+addPizza({ name: "bcd", price: 12 });
+addPizza({ name: "efg", price: 12 });
 placeOrder("Pesto Chicken");
-console.log(menu)
-console.log(orderQueue)
-console.log("Hello world")
-completeOrder(2)
-console.log(orderQueue)
+placeOrder("bcd");
+completeOrder(1);
+console.log({ menu: menu });
+console.log({ cash: cashInRegister });
+console.log({ order: orderQueue });
