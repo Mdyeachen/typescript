@@ -8,7 +8,7 @@ var menu = [
     { name: "Veggie Supreme", price: 11 },
     { name: "Buffalo Chicken", price: 14 },
     { name: "Four Cheese", price: 13 },
-    { name: "Mushroom & Truffle", price: 16 },
+    { name: "Mushroom & Truffle", price: 16 }
 ];
 var cashInRegister = 100;
 var orderId = 1;
@@ -21,7 +21,7 @@ var addPizza = function (pizzaObject) {
 var placeOrder = function (pizzaName) {
     var findPizza = menu.find(function (pizzaObject) { return pizzaObject.name === pizzaName; });
     if (!findPizza) {
-        console.error("".concat(findPizza, " is not exit in the menu"));
+        console.error("".concat(pizzaName, " is not exit in the menu"));
         return;
     }
     cashInRegister += findPizza.price;
@@ -32,8 +32,11 @@ var placeOrder = function (pizzaName) {
 // order complete function
 var completeOrder = function (orderid) {
     var findOrder = orderQueue.find(function (order) { return order.id === orderid; });
-    if (findOrder)
-        findOrder.status = "Completed";
+    if (!findOrder) {
+        console.error("".concat(orderid, " was not found in the orderQueue"));
+        return;
+    }
+    findOrder.status = "Completed";
     return findOrder;
 };
 addPizza({ name: "Pesto Chicken", price: 12 });

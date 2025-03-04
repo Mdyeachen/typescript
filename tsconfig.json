@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "es2015", // Compile to ES2015 (ES6)
+    "lib": ["es2015", "dom"], // Include ES2015 and DOM libraries
+    "module": "commonjs", // Use CommonJS modules
+    "strict": true, // Enable all strict type-checking options
+    "esModuleInterop": true, // Enable ES module interop
+    "skipLibCheck": true, // Skip type-checking of declaration files
+    "forceConsistentCasingInFileNames": true // Ensure consistent casing in file names
+  },
+  "include": ["**/*.ts"], // Include all .ts files
+  "exclude": ["node_modules"] // Exclude node_modules
+}
